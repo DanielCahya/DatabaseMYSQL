@@ -82,3 +82,4 @@ WHERE pria.jkelamin = 'P' AND wanita.jkelamin = 'W';
 - The queries demonstrate the use of `JOIN`, conditional logic (`IF`, `CASE`), and date functions (`YEAR`, `NOW`).
 - The database is designed to highlight relationships and demographics within the civil record system.
 
+![This is the Ouput](../output/Output3.png)
