@@ -1,0 +1,72 @@
+DROP DATABASE IF EXISTS dbFungsi;
+CREATE DATABASE dbFungsi;
+USE dbFungsi;
+
+CREATE TABLE tblData(
+    nama VARCHAR(20),
+    tanggallahir DATE,
+    nilaites INT
+);
+
+INSERT INTO tblData
+VALUES ('NATALIA SUWARNO','2001-03-01',80),
+('DEWI WULANDARI','2002-05-05','60'),
+('MARIA ADRIYANI','2002-04-07','55'),
+('MARKUS HENDRAWAN','2000-09-09','79'),
+('ROBI WILLIAM','1999-03-11','60'),
+('VINCENT HERLAMBANG','1998-04-18','95'),
+('MICHAEL WIRYA','2001-09-03','10');
+
+SELECT nama,
+lower(nama) AS huruf_kecil,
+upper(nama) AS huruf_besar,
+length(nama) AS Panjang_karakter,
+CONCAT('nama = ',nama,' Nilai = ',nilaites) AS GABUNG,
+LOCATE ('AN',nama,1) AS CARI_AN,
+-- 1 = CARI DARI POSISI KE 1. BISA DIGANTI 0 1 2 ATAU 3 
+
+SUBSTR(nama,3,5) AS AMBIL
+-- AMBIL STRING DARI POSISI KE 3 SEBANYAK 5 KARAKTER
+FROM tblData;
+
+SELECT nilaites,
+MAX(nilaites) AS NILAI_MAX,
+MIN(nilaites) AS MINIMAL,
+AVG(nilaites) AS RATA_RATA,
+COUNT(nilaites) AS JUMLAH,
+SUM(nilaites) AS TOTAL_NILAI,
+STD(nilaites) AS STANDAR
+FROM tblData;
+
+SELECT tanggallahir,
+NOW() AS SAAT_INI,
+-- NOW SEMUA DARI TANGGAL TAHUN BULAN DAN JAM
+YEAR(tanggallahir) AS TAHUN_LAHIR,
+MONTH(tanggallahir) AS BULAN_LAHIR,
+DAY(tanggallahir) AS HARI,
+DAYNAME(tanggallahir) AS HARI,
+CURTIME() AS JAM_SAAT_INI,
+CURDATE() AS TANGGAL_SAAT_INI,
+DATEDIFF(NOW(),tanggallahir) AS JARAK
+-- JARAK TAHUN LAHIR SAMPAI SEKARANG
+FROM tblData;
+
+SELECT nama,tanggallahir,
+YEAR(tanggallahir) AS TAHUN_LAHIR,
+IF(YEAR(tanggallahir) >= 2000,'LAHIR SETELAH TAHUN 2000',
+'LAHIR SEBELUM TAHUN 2000') AS KETERANGAN
+FROM tblData;
+
+SELECT nama,nilaites,
+IF(nilaites > 70,'LULUS','TIDAK LULUS') AS STATUS
+FROM tblData;
+
+SELECT nama,nilaites,
+CASE
+WHEN nilaites >= 80 THEN'A'
+WHEN nilaites BETWEEN 60 AND 79 THEN 'B'
+WHEN nilaites BETWEEN 40 AND 59 THEN 'C'
+WHEN nilaites BETWEEN 20 AND 39 THEN 'D'
+ELSE 'BODO'
+END AS NILAI_HURUF
+FROM tblData;
